@@ -1,0 +1,40 @@
+Create db:
+sudo -u name_of_user createdb name_of_database
+
+run env:
+source env/bin/activate
+
+Correr esto en terminal, y actualizarlo en tu .env:
+export APP_SETTINGS="config.DevelopmentConfig"
+export DATABASE_URL="postgresql://localhost/NAME OF YOUR DB"
+
+CREAR MODELO:
+primera vez:
+python manage.py db init
+updetear:
+python manage.py db migrate
+python manage.py db upgrade
+
+Correr:
+python manage.py runserver
+
+request:
+http://127.0.0.1:5000/add?user=diego&password=diego
+http://127.0.0.1:5000/getall
+
+pip freeze > requirements.txt
+
+Pushear heroku:
+heroku create name_of_your_application
+git remote add prod heroku_git_url
+heroku config:set APP_SETTINGS=config.ProductionConfig --remote prod
+heroku addons:create heroku-postgresql:hobby-dev --app name_of_your_application
+
+check confs:
+heroku config --app name_of_your_application
+git push prod master
+
+RUN MIGRATIONS ON HEROKU:
+heroku run python manage.py db upgrade --app name_of_your_application
+
+DELETE MIGRATIONS FROM .GITIGNORE
